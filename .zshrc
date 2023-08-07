@@ -108,6 +108,7 @@ alias v="vagrant"
 alias gop="git-open"
 alias gpl="git pull"
 alias gs="git status"
+alias pwg='(){ echo -n $(pwgen -s $1 1) | pbcopy && echo "Random password of length $1 copied to clipboard"; }'
 alias rmi="rm -rI"
 
 # Credentials
@@ -115,6 +116,7 @@ alias rmi="rm -rI"
 source ~/.cloudflare/credentials
 source ~/.digitalocean/credentials
 source ~/.heroku/credentials
+source ~/.logtail/credentials
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -128,6 +130,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
 # asdf
-. /usr/local/opt/asdf/libexec/asdf.sh
 unset ASDF_DIR
 source $(brew --prefix asdf)/libexec/asdf.sh
+export PATH="${HOME}/.pyenv/shims:${PATH}"
+export GPG_TTY=$(tty)
