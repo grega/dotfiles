@@ -109,6 +109,7 @@ alias gop="git-open"
 alias gpl="git pull"
 alias gs="git status"
 alias pwg='(){ echo -n $(pwgen -s $1 1) | pbcopy && echo "Random password of length $1 copied to clipboard"; }'
+alias pwgs='(){ echo -n $(pwgen -sy $1 1) | pbcopy && echo "Random password (including symbols) of length $1 copied to clipboard"; }'
 alias rmi="rm -rI"
 
 # Credentials
