@@ -101,23 +101,25 @@ export VISUAL="$EDITOR"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias g="git"
+alias cw='watch -n'
 alias dc="docker-compose"
-alias tf="terraform"
-alias v="vagrant"
+alias g="git"
+alias hdash="heroku_dashboard"
 alias gop="git-open"
 alias gpl="git pull"
 alias gs="git status"
 alias pwg='(){ echo -n $(pwgen -s $1 1) | pbcopy && echo "Random password of length $1 copied to clipboard"; }'
 alias pwgs='(){ echo -n $(pwgen -sy $1 1) | pbcopy && echo "Random password (including symbols) of length $1 copied to clipboard"; }'
 alias rmi="rm -rI"
+alias tf="terraform"
+alias v="vagrant"
 
 # Credentials
-#source ~/.aws/credentials
+#source ~/.aws/credentials # automatically sourced by AWS CLI, Terraform CLI...
 source ~/.cloudflare/credentials
 source ~/.digitalocean/credentials
 source ~/.heroku/credentials
-source ~/.logtail/credentials
+source ~/.betterstack/credentials
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -129,9 +131,44 @@ export EDITOR="code -w"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 
 # asdf
 unset ASDF_DIR
 source $(brew --prefix asdf)/libexec/asdf.sh
 export PATH="${HOME}/.pyenv/shims:${PATH}"
 export GPG_TTY=$(tty)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/greg/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/greg/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/greg/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/greg/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# command to open Heroku dashboard in a browser, given the URL (HEROKU_PIPELINE_URL) is set in .env file
+heroku_dashboard() {
+    get_heroku_url_from_env() {
+        if [ ! -f ".env" ]; then
+            echo "No .env file found in the current directory."
+            return 1
+        fi
+
+        source .env
+
+        if [[ -z "${HEROKU_PIPELINE_URL}" ]]; then
+            echo "HEROKU_PIPELINE_URL not set in .env file."
+            return 1
+        fi
+
+        echo "${HEROKU_PIPELINE_URL}"
+    }
+
+    # get Heroku URL from .env file
+    heroku_pipeline_url=$(get_heroku_url_from_env)
+    if [[ $? -ne 0 ]]; then
+        echo "Error: $heroku_pipeline_url"
+        return 1
+    fi
+
+    open "$heroku_pipeline_url"
+}
