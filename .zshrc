@@ -103,6 +103,7 @@ export VISUAL="$EDITOR"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cw='watch -n'
 alias dc="docker-compose"
+alias dcu="docker compose up --remove-orphans"
 alias g="git"
 alias hdash="heroku_dashboard"
 alias gop="git-open"
@@ -116,10 +117,12 @@ alias v="vagrant"
 
 # Credentials
 #source ~/.aws/credentials # automatically sourced by AWS CLI, Terraform CLI...
+source ~/.betterstack/credentials
 source ~/.cloudflare/credentials
 source ~/.digitalocean/credentials
+source ~/.hydra/credentials
+source ~/.github/credentials
 source ~/.heroku/credentials
-source ~/.betterstack/credentials
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
