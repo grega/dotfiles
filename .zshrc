@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR=nano
+export EDITOR=code
 export VISUAL="$EDITOR"
 
 # Compilation flags
@@ -142,13 +142,7 @@ source $(brew --prefix asdf)/libexec/asdf.sh
 export PATH="${HOME}/.pyenv/shims:${PATH}"
 export GPG_TTY=$(tty)
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/greg/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/greg/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/greg/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/greg/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# command to open Heroku dashboard in a browser, given the URL (HEROKU_PIPELINE_URL) is set in .env file
+# command to open Heroku dashboard in a browser, given the URL (HEROKU_PIPELINE_URL) is set in a .env file
 heroku_dashboard() {
     get_heroku_url_from_env() {
         if [ ! -f ".env" ]; then
